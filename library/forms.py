@@ -133,7 +133,7 @@ class SearchForm(forms.Form):
 
 class MovieSearchForm(forms.Form):
     CHOICES = [
-        (u'标题', u'标题')
+        (u'Titile', u'Titile')
     ]
 
     # 首页搜索栏，默认书名搜索
@@ -141,7 +141,7 @@ class MovieSearchForm(forms.Form):
         label='',
         choices=CHOICES,
         widget=forms.RadioSelect(),
-        initial=u'标题',
+        initial=u'Titile',
     )
 
     keyword = forms.CharField(
@@ -149,7 +149,7 @@ class MovieSearchForm(forms.Form):
         max_length=32,
         widget=forms.TextInput(attrs={
             'class': 'form-control input-lg',
-            'placeholder': u'请输入需要检索的电影标题',
+            'placeholder': u'请输入需要检索的电影Titile',
             'name': 'keyword',
         })
     )

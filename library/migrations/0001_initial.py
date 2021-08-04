@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('rate', models.CharField(max_length=4, verbose_name='评分')),
-                ('title', models.CharField(max_length=64, verbose_name='标题')),
+                ('title', models.CharField(max_length=64, verbose_name='Titile')),
                 ('movie_url', models.URLField(verbose_name='电影链接')),
                 ('image', models.ImageField(blank=True, upload_to=library.models.custom_path, verbose_name='电影封面')),
                 ('info', models.TextField(verbose_name='简介')),

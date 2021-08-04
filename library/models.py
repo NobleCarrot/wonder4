@@ -79,7 +79,7 @@ class Borrowing(models.Model):
 
 class Movie(models.Model):
     rate=models.CharField(max_length=4,verbose_name='评分')
-    title=models.CharField(max_length=64,verbose_name='标题')
+    title=models.CharField(max_length=64,verbose_name='Titile')
     movie_url=models.URLField(verbose_name='电影链接')
     image=models.ImageField(blank=True,upload_to=custom_path, verbose_name='电影封面')
     info=models.TextField(verbose_name='简介')

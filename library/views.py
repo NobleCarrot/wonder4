@@ -211,9 +211,9 @@ def book_search(request):
     books = []
     current_path = request.get_full_path()
 
-    keyword = request.GET.get('keyword', u'_书目列表')
+    keyword = request.GET.get('keyword', u'_Booklist')
 
-    if keyword == u'_书目列表':
+    if keyword == u'_Booklist':
         books = Book.objects.all()
     else:
         if search_by == u'书名':
@@ -261,13 +261,13 @@ def movie_search_index(request):
 
 
 def movie_search(request):
-    search_by = request.GET.get('search_by', '标题')
+    search_by = request.GET.get('search_by', 'Titile')
     movies = []
     current_path = request.get_full_path()
 
-    keyword = request.GET.get('keyword', u'_标题')
+    keyword = request.GET.get('keyword', u'_Titile')
 
-    if keyword == u'_标题':
+    if keyword == u'_Titile':
        movies = Movie.objects.all()
     else:
         keyword = request.GET.get('keyword', None)

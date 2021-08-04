@@ -1,6 +1,6 @@
 {% extends "library/base.html" %}
 {% load staticfiles %}
-{% block title %}查看读者信息{% endblock %}
+{% block title %}View reader information{% endblock %}
 
 {% block content %}
 
@@ -9,11 +9,11 @@
             <div class="alert alert-warning">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
                 {% if state == 'renew_success' %}
-                    <h2>续借成功</h2>
+                    <h2>Renewal succeeded.</h2>
                 {% elif state == 'return_success' %}
-                    <h2>还书成功</h2>
+                    <h2>Return the book successfully.</h2>
                 {% elif state == 'borrow_success' %}
-                    <h2>借书成功</h2>
+                    <h2>Successful borrowing.</h2>
                 {% endif %}
             </div>
         </div>
@@ -24,18 +24,18 @@
         <div class="row">
                 <div class="col-md-4">
                     <img src="/media/{{ reader.photo }}" style="width: 300px">
-                    <h2 class="text-center">姓名:{{ reader.name }}</h2>
+                    <h2 class="text-center">Name:{{ reader.name }}</h2>
                     <br>
                     <h4><span class="glyphicon glyphicon-phone"></span>
-                        电话：{{ reader.phone }}
+                        Tel：{{ reader.phone }}
                     </h4>
-                    <h4>余额：{{ reader.balance }}</h4>
-                    <h4>可借数量：{{ reader.max_borrowing }}</h4>
+                    <h4>Balance：{{ reader.balance }}</h4>
+                    <h4>Loanable quantity：{{ reader.max_borrowing }}</h4>
                     <hr>
                     <table class="table table-bordered">
                         <thead>
-                        <th>正在借阅:</th>
-                        <th>应还日期：</th>
+                        <th>Borrowing:</th>
+                        <th>Due date：</th>
                         </thead>
                         <tbody>
                         {% for b in borrowing %}
@@ -44,13 +44,13 @@
                                 <td><h4>{{ b.date_due_to_returned|date:'Y-m-d' }}</h4></td>
                                 <td>
                                     <button class="btn btn-primary"
-                                            onclick="location.href='../book/action?action=renew_book&id={{ b.id }}';">续借
+                                            onclick="location.href='../book/action?action=renew_book&id={{ b.id }}';">Renew
                                     </button>
                                 </td>
                                 <td>
                                     <button class="btn btn-primary"
                                             onclick="location.href='../book/action?action=return_book&id={{ b.id }}';">
-                                        还书
+                                        Return
                                     </button>
                                 </td>
                             </tr>

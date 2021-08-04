@@ -1,6 +1,6 @@
 {% extends "library/base.html" %}
 {% load staticfiles %}
-{% block title %}搜索{% endblock %}
+{% block title %}search{% endblock %}
 
 {% block content %}
 
@@ -20,7 +20,7 @@
                     <div class="input-group">
                         {{ movieSearchForm.keyword }}
                         <span class="input-group-btn">
-                        <button class="btn btn-default btn-lg btn-info" type="submit">电影搜索</button>
+                        <button class="btn btn-default btn-lg btn-info" type="submit">movie search</button>
                     </span>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
         <table class="table table-hover">
             <thead>
             <th>#</th>
-            <th>电影封面</th>
-            <th>标题</th>
-            <th>评分</th>
-            <th>豆掰详情</th>
-            <th>电影简介</th>
+            <th>film cover</th>
+            <th>title</th>
+            <th>score</th>
+            <th>details</th>
+            <th>introduction</th>
             </thead>
             <tbody>
             {% for movie in movies %}
@@ -51,7 +51,7 @@
                 </tr>
             {% empty %}
                 <tr>
-                    <td>暂无电影</td>
+                    <td>No movie</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -61,18 +61,18 @@
             <ul class="pager">
                 {% if movies.has_previous %}
                     <li class="previous"><a
-                            href="{{ current_path }}&page={{ movies.previous_page_number }}#hint">上一页</a>
+                            href="{{ current_path }}&page={{ movies.previous_page_number }}#hint">last page</a>
                     </li>
                 {% else %}
-                    <li class="previous disabled"><a href="#">上一页</a></li>
+                    <li class="previous disabled"><a href="#">last page</a></li>
                 {% endif %}
-                第 {{ movies.number }} / {{ movies.paginator.num_pages }}页
+                第 {{ movies.number }} / {{ movies.paginator.num_pages }}page
                 {% if movies.has_next %}
                     <li class="next"><a
-                            href="{{ current_path }}&page={{ movies.next_page_number }}#hint">下一页</a>
+                            href="{{ current_path }}&page={{ movies.next_page_number }}#hint">next page</a>
                     </li>
                 {% else %}
-                    <li class="next disabled"><a href="#">下一页</a></li>
+                    <li class="next disabled"><a href="#">next page</a></li>
                 {% endif %}
             </ul>
         </nav>
