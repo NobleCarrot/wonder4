@@ -1,6 +1,6 @@
 {% extends "library/base.html" %}
 {% load staticfiles %}
-{% block title %}查看图书{% endblock %}
+{% block title %}Check books{% endblock %}
 
 
 
@@ -11,11 +11,11 @@
             <div class="alert alert-warning">
                 <a href="/login" class="close" data-dismiss="alert">&times;</a>
                 {% if state == 'no_user' %}
-                    <h2>请登陆</h2>
+                    <h2>Please Login</h2>
                 {% elif state == 'upper_limit' %}
-                    <h2> 对不起，您借书数量已经达到上线</h2>
+                    <h2> Sorry, the number of books you have borrowed has reached the maximum.</h2>
                 {% elif state == 'success' %}
-                    <h2>借阅成功</h2>
+                    <h2>Borrowing succeeded.</h2>
                 {% endif %}
             </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="alert alert-warning">
                 <a href="/search/" class="close" data-dismiss="alert">&times;</a>
-                    <h2> 对不起，此书已全部借出</h2>
+                    <h2> Sorry, this book has been fully lent out.</h2>
             </div>
         </div>
 

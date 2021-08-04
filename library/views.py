@@ -24,21 +24,21 @@ def index(request):
 
 
 def user_login(request):
-    #判断用户是否登录，已登录就重定向到首页
+    # Determine if the user is logged in, and redirect to the home page if logged in.
     if request.user.is_authenticated:
         return HttpResponseRedirect('/')
 
     state = None
-    # 未登录的，获取POST数据验证该用户是否存在
+    # If you are not logged in, get the POST data to verify if the user exists.
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        #验证用户是否存在
+        # Verify the existence of the user
         user = auth.authenticate(username=username, password=password)
 
         if user:
             if user.is_active:
-                #用户登录
+                # User Login
                 auth.login(request, user)
                 return HttpResponseRedirect('/')
             else:
@@ -65,7 +65,7 @@ def user_register(request):
         registerForm = RegisterForm(request.POST, request.FILES)
         password = request.POST.get('password', '')
         repeat_password = request.POST.get('re_password', '')
-        #判断两次输入密码是否一致
+        # Determine if the password entered twice is the same
         if password == '' or repeat_password == '':
             state = 'empty'
         elif password != repeat_password:
@@ -73,23 +73,23 @@ def user_register(request):
         else:
             username = request.POST.get('username', '')
             name = request.POST.get('name', '')
-            #判断用户名是否存在
+            # Determine if a username exists
             if User.objects.filter(username=username):
                 state = 'user_exist'
             else:
-                #不存在同名用户，那就创建一个用户，并保存密码
+                # No user with the same name exists, then create a user and save the password
                 new_user = User.objects.create(username=username)
                 new_user.set_password(password)
                 new_user.save()
-                #创建用户的同时，即创建一个读者
+                # When you create a user, you create a reader
                 new_reader = Reader.objects.create(user=new_user, name=name, phone=int(username))
                 new_reader.photo = request.FILES['photo']
                 new_reader.save()
                 state = 'success'
 
-                #用户登录
+                # User Login
                 auth.login(request, new_user)
-                #return HttpResponseRedirect('/')
+                # return HttpResponseRedirect('/')
 
                 context = {
                     'state': state,
@@ -106,13 +106,13 @@ def user_register(request):
 
 
 
-#如果用户没有登录，会重定向到 settings.LOGIN_URL ，并传递绝对路径到查询字符串中
-#如果用户已经登录，则正常执行视图。视图里的代码可以假设用户已经登录了。
+# If the user is not logged in, it will redirect to settings.LOGIN_URL and pass the absolute path to the query string
+# If the user is logged in, the view is executed normally. The code in the view can assume that the user is already logged in.
 @login_required
 def set_password(request):
-    """
-    重置密码，条件是已登录
-    """
+
+    # Reset password, but only if you are logged in
+
     user = request.user
     state = None
     if request.method == 'POST':
@@ -143,7 +143,8 @@ def user_logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
-#读者信息
+# Reader Information
+
 def profile(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login')
@@ -171,7 +172,7 @@ def reader_operation(request):
     action = request.GET.get('action', None)
 
     if action == 'return_book':
-        #id为书的id
+        # id is the id of the book
         id = request.GET.get('id', None)
         if not id:
             return HttpResponse('no id')
@@ -207,22 +208,22 @@ def reader_operation(request):
 
 
 def book_search(request):
-    search_by = request.GET.get('search_by', '书名')
+    search_by = request.GET.get('search_by', 'Book Title')
     books = []
     current_path = request.get_full_path()
 
-    keyword = request.GET.get('keyword', u'_书目列表')
+    keyword = request.GET.get('keyword', u'_List of Book Title')
 
-    if keyword == u'_书目列表':
+    if keyword == u'_List of Book Title':
         books = Book.objects.all()
     else:
-        if search_by == u'书名':
+        if search_by == u'Book Title':
             keyword = request.GET.get('keyword', None)
             books = Book.objects.filter(title__contains=keyword).order_by('-title')[0:50]
         elif search_by == u'ISBN':
             keyword = request.GET.get('keyword', None)
             books = Book.objects.filter(ISBN__contains=keyword).order_by('-title')[0:50]
-        elif search_by == u'作者':
+        elif search_by == u'Author':
             keyword = request.GET.get('keyword', None)
             books = Book.objects.filter(author__contains=keyword).order_by('-title')[0:50]
 
@@ -261,13 +262,13 @@ def movie_search_index(request):
 
 
 def movie_search(request):
-    search_by = request.GET.get('search_by', '标题')
+    search_by = request.GET.get('search_by', 'Title')
     movies = []
     current_path = request.get_full_path()
 
-    keyword = request.GET.get('keyword', u'_标题')
+    keyword = request.GET.get('keyword', u'_Title')
 
-    if keyword == u'_标题':
+    if keyword == u'_Title':
        movies = Movie.objects.all()
     else:
         keyword = request.GET.get('keyword', None)

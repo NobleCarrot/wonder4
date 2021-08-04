@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 class libraryConfig(AppConfig):
     name = 'library'
-    verbose_name = 'carrot is handsome'
+    verbose_name = 'borrow management'

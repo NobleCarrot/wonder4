@@ -19,9 +19,9 @@ class Migration(migrations.Migration):
             name='Book',
             fields=[
                 ('ISBN', models.CharField(max_length=13, primary_key=True, serialize=False, verbose_name='ISBN')),
-                ('title', models.CharField(max_length=128, verbose_name='书名')),
-                ('author', models.CharField(max_length=32, verbose_name='作者')),
-                ('press', models.CharField(max_length=64, verbose_name='出版社')),
+                ('title', models.CharField(max_length=128, verbose_name='Book name')),
+                ('author', models.CharField(max_length=32, verbose_name='Author')),
+                ('press', models.CharField(max_length=64, verbose_name='publication')),
                 ('description', models.CharField(default='', max_length=10240, verbose_name='详细')),
                 ('price', models.CharField(max_length=20, null=True, verbose_name='价格')),
                 ('category', models.CharField(default='文学', max_length=64, verbose_name='分类')),

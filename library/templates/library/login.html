@@ -1,6 +1,6 @@
 {% extends 'library/base.html' %}
 
-{% block title %} 请登陆 {% endblock %}
+{% block title %} Please Login {% endblock %}
 
 {% load static %}
 <link href="{% static 'library/signin.css' %}" rel="stylesheet">
@@ -11,7 +11,7 @@
         <div class="col-md-2 col-md-offset-5">
             <div class="alert alert-warning">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <h2>用户不存在或密码错误</h2>
+                <h2>The user does not exist or the password is incorrect.</h2>
             </div>
         </div>
     {% endif %}
@@ -23,7 +23,7 @@
 
                 <form method="POST" role="form" class="form-horizontal" action="/login/">
                     {% csrf_token %}
-                    <h1 class="form-signin-heading text-center">请登陆</h1>
+                    <h1 class="form-signin-heading text-center">Please Login</h1>
 
                     {% for field in loginForm %}
                         <div class="form-group">
@@ -37,7 +37,7 @@
 
                     <div class="form-group">
                         <div class="col-md-9 col-md-offset-3">
-                            <button class="btn btn btn-primary btn-block" type="submit">登陆</button>
+                            <button class="btn btn btn-primary btn-block" type="submit">Login</button>
                         </div>
                     </div>
                 </form>

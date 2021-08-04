@@ -1,6 +1,6 @@
 {% extends 'library/base.html' %}
 
-{% block title %} 请登陆 {% endblock %}
+{% block title %} please login {% endblock %}
 
 {% load static %}
 <link href="{% static 'library/signin.css' %}" rel="stylesheet">
@@ -12,13 +12,13 @@
             <div class="alert alert-warning">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
                 {% if state == 'success' %}
-                    <h2> 注册成功！ </h2>
+                    <h2> regist successfully！ </h2>
                 {% elif state == 'repeat_error' %}
-                    <h2> 密码重复错误 </h2>
+                    <h2> Duplicate password error </h2>
                 {% elif state == 'empty' %}
-                    <h2> 密码不能为空 </h2>
+                    <h2> The password cannot be empty </h2>
                 {% elif state == 'user_exist' %}
-                    <h2> 户已经存在 </h2>
+                    <h2> The account already exists </h2>
                 {% endif %}
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <form method="POST" action="/register/" role="form" class="form-horizontal"
                       enctype="multipart/form-data">
                     {% csrf_token %}
-                    <h1 class="form-signin-heading text-center">请注册</h1>
+                    <h1 class="form-signin-heading text-center">please signin</h1>
 
                     {% for field in registerForm %}
                         <div class="form-group">
@@ -40,7 +40,7 @@
                                 {{ field }}
 
                                 {% if field.auto_id == 'id_username' %}
-                                    <span class="help-block">用于登陆，手机号码</span>
+                                    <span class="help-block">For login, mobile phone number (9 digits)</span>
                                 {% endif %}
                             </div>
                         </div>
@@ -49,7 +49,7 @@
 
                     <div class="form-group">
                         <div class="col-md-9 col-md-offset-3">
-                            <button class="btn btn btn-primary btn-block" type="submit">注册</button>
+                            <button class="btn btn btn-primary btn-block" type="submit">registration</button>
                         </div>
                     </div>
 
