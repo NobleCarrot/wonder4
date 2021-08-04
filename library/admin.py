@@ -19,5 +19,5 @@ admin.site.register(Book,BookAdmin)
 admin.site.register(Borrowing,BorrowingAdmin)
 admin.site.register(Reader,ReaderAdmin)
 admin.site.register(Movie,MovieAdmin)
-admin.site.name = '图书、电影信息管理'
-admin.site.site_header = '图书、电影信息管理'
+admin.site.name = 'B&M information system'
+admin.site.site_header = 'B&M information system'
