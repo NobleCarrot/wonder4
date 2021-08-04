@@ -7,7 +7,7 @@ from django import forms
 class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=16,
-        label=u'用户名：',
+        label=u'Username：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'name': 'username',
@@ -15,7 +15,7 @@ class LoginForm(forms.Form):
         })
     )
     password = forms.CharField(
-        label=u'密码：',
+        label=u'Password：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'type': 'password',
@@ -27,7 +27,7 @@ class LoginForm(forms.Form):
 
 class RegisterForm(forms.Form):
     username = forms.CharField(
-        label=u'用户名/手机号码：',
+        label=u'Tel：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'name': 'username',
@@ -35,7 +35,7 @@ class RegisterForm(forms.Form):
         }),
     )
     name = forms.CharField(
-        label=u'名字：',
+        label=u'Name：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'name': 'name',
@@ -43,7 +43,7 @@ class RegisterForm(forms.Form):
         }),
     )
     password = forms.CharField(
-        label=u'密码：',
+        label=u'Password：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'name': 'password',
@@ -51,7 +51,7 @@ class RegisterForm(forms.Form):
         }),
     )
     re_password = forms.CharField(
-        label=u'重复密码：',
+        label=u'Enter the password again：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'type': 'password',
@@ -60,7 +60,7 @@ class RegisterForm(forms.Form):
         }),
     )
     email = forms.CharField(
-        label=u'电子邮件：',
+        label=u'E-mail：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'name': 'email',
@@ -70,7 +70,7 @@ class RegisterForm(forms.Form):
     )
 
     photo = forms.FileField(
-        label=u'头像：',
+        label=u'Profile photo：',
         widget=forms.FileInput(attrs={
             'class': 'form-control',
             'name': 'photo',
@@ -81,7 +81,7 @@ class RegisterForm(forms.Form):
 
 class ResetPasswordForm(forms.Form):
     old_password = forms.CharField(
-        label=u'原始密码：',
+        label=u'Origin password：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'name': 'old_password',
@@ -89,7 +89,7 @@ class ResetPasswordForm(forms.Form):
         }),
     )
     new_password = forms.CharField(
-        label=u'新密码：',
+        label=u'New password：',
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'name': 'new_password',
@@ -97,7 +97,7 @@ class ResetPasswordForm(forms.Form):
         }),
     )
     repeat_password = forms.CharField(
-        label=u'重复密码：',
+        label=u'Enter the password again：',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'name': 'repeat_password',
@@ -108,8 +108,8 @@ class ResetPasswordForm(forms.Form):
 class SearchForm(forms.Form):
         CHOICES = [
             (u'ISBN', u'ISBN'),
-            (u'书名', u'书名'),
-            (u'作者', u'作者')
+            (u'Book name', u'Book name'),
+            (u'Author', u'Author')
         ]
 
         #首页搜索栏，默认书名搜索
@@ -117,7 +117,7 @@ class SearchForm(forms.Form):
             label='',
             choices=CHOICES,
             widget=forms.RadioSelect(),
-            initial=u'书名',
+            initial=u'Book name',
         )
 
         keyword = forms.CharField(
@@ -125,7 +125,7 @@ class SearchForm(forms.Form):
             max_length=32,
             widget=forms.TextInput(attrs={
                 'class': 'form-control input-lg',
-                'placeholder': u'请输入需要检索的图书信息',
+                'placeholder': u'Please enter the information about book you want to search:',
                 'name': 'keyword',
             })
         )
@@ -133,7 +133,7 @@ class SearchForm(forms.Form):
 
 class MovieSearchForm(forms.Form):
     CHOICES = [
-        (u'Titile', u'Titile')
+        (u'Title', u'Title')
     ]
 
     # 首页搜索栏，默认书名搜索
@@ -141,7 +141,7 @@ class MovieSearchForm(forms.Form):
         label='',
         choices=CHOICES,
         widget=forms.RadioSelect(),
-        initial=u'Titile',
+        initial=u'Title',
     )
 
     keyword = forms.CharField(
@@ -149,7 +149,7 @@ class MovieSearchForm(forms.Form):
         max_length=32,
         widget=forms.TextInput(attrs={
             'class': 'form-control input-lg',
-            'placeholder': u'请输入需要检索的电影Titile',
+            'placeholder': u'Please enter the title of the movie you want to search:',
             'name': 'keyword',
         })
     )

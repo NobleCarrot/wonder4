@@ -15,15 +15,15 @@ def custom_path(instance, filename):
 
 class Reader(models.Model):
     class Meta:
-        verbose_name = '读者'
-        verbose_name_plural = '读者'
+        verbose_name = 'reader'
+        verbose_name_plural = 'reader'
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='读者')
-    name = models.CharField(max_length=16, unique=True, verbose_name='姓名')
-    phone = models.IntegerField(unique=True, verbose_name='电话')
-    max_borrowing = models.IntegerField(default=5, verbose_name='可借数量')
-    balance = models.FloatField(default=0.0, verbose_name='余额')
-    photo = models.ImageField(blank=True, upload_to=custom_path, verbose_name='头像')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='reader')
+    name = models.CharField(max_length=16, unique=True, verbose_name='name')
+    phone = models.IntegerField(unique=True, verbose_name='telephone')
+    max_borrowing = models.IntegerField(default=5, verbose_name='remaining quantity')
+    balance = models.FloatField(default=0.0, verbose_name='balance')
+    photo = models.ImageField(blank=True, upload_to=custom_path, verbose_name='head portrait')
 
     STATUS_CHOICES = (
         (0, 'normal'),
@@ -40,22 +40,22 @@ class Reader(models.Model):
 
 class Book(models.Model):
     class Meta:
-        verbose_name = '图书'
-        verbose_name_plural = '图书'
+        verbose_name = 'books'
+        verbose_name_plural = 'books'
 
     ISBN = models.CharField(max_length=13, primary_key=True, verbose_name='ISBN')
-    title = models.CharField(max_length=128, verbose_name='书名')
-    author = models.CharField(max_length=32, verbose_name='作者')
-    press = models.CharField(max_length=64, verbose_name='出版社')
+    title = models.CharField(max_length=128, verbose_name='book name')
+    author = models.CharField(max_length=32, verbose_name='author')
+    press = models.CharField(max_length=64, verbose_name='publisher')
 
-    description = models.CharField(max_length=10240, default='', verbose_name='详细')
-    price = models.CharField(max_length=20, null=True, verbose_name='价格')
+    description = models.CharField(max_length=10240, default='', verbose_name='detials')
+    price = models.CharField(max_length=20, null=True, verbose_name='price')
 
-    category = models.CharField(max_length=64, default=u'文学', verbose_name='分类')
-    cover = models.ImageField(blank=True, upload_to=custom_path, verbose_name='封面')
-    index = models.CharField(max_length=16, null=True, verbose_name='索引')
-    location = models.CharField(max_length=64, default=u'图书馆1楼', verbose_name='位置')
-    quantity = models.IntegerField(default=1, verbose_name='数量')
+    category = models.CharField(max_length=64, default=u'literature', verbose_name='catelog')
+    cover = models.ImageField(blank=True, upload_to=custom_path, verbose_name='cover')
+    index = models.CharField(max_length=16, null=True, verbose_name='indexes')
+    location = models.CharField(max_length=64, default=u'1st floor in library', verbose_name='position')
+    quantity = models.IntegerField(default=1, verbose_name='quantity')
 
     def __str__(self):
         return self.title + self.author
@@ -63,31 +63,31 @@ class Book(models.Model):
 
 class Borrowing(models.Model):
     class Meta:
-        verbose_name = '借阅'
-        verbose_name_plural = '借阅'
+        verbose_name = 'borrow'
+        verbose_name_plural = 'borrow'
 
-    reader = models.ForeignKey(Reader, on_delete=models.CASCADE, verbose_name='读者')
+    reader = models.ForeignKey(Reader, on_delete=models.CASCADE, verbose_name='reader')
     ISBN = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='ISBN')
-    date_issued = models.DateField(verbose_name='借出时间')
-    date_due_to_returned = models.DateField(verbose_name='应还时间')
-    date_returned = models.DateField(null=True, verbose_name='还书时间')
-    amount_of_fine = models.FloatField(default=0.0, verbose_name='欠款')
+    date_issued = models.DateField(verbose_name='borrow time')
+    date_due_to_returned = models.DateField(verbose_name='deadline')
+    date_returned = models.DateField(null=True, verbose_name='return time')
+    amount_of_fine = models.FloatField(default=0.0, verbose_name='debt')
 
     def __str__(self):
-        return '{} 借了 {}'.format(self.reader, self.ISBN)
+        return '{} borrows {}'.format(self.reader, self.ISBN)
 
 
 class Movie(models.Model):
-    rate=models.CharField(max_length=4,verbose_name='评分')
-    title=models.CharField(max_length=64,verbose_name='Titile')
-    movie_url=models.URLField(verbose_name='电影链接')
-    image=models.ImageField(blank=True,upload_to=custom_path, verbose_name='电影封面')
-    info=models.TextField(verbose_name='简介')
+    rate=models.CharField(max_length=4,verbose_name='score')
+    title=models.CharField(max_length=64,verbose_name='title')
+    movie_url=models.URLField(verbose_name='film links')
+    image=models.ImageField(blank=True,upload_to=custom_path, verbose_name='film covers')
+    info=models.TextField(verbose_name='introduction')
 
 
     def __str__(self):
         return self.title
     class Meta:
-        verbose_name = '电影'
-        verbose_name_plural = '电影'
+        verbose_name = 'movie'
+        verbose_name_plural = 'movie'
 

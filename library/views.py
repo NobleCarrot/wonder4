@@ -81,7 +81,7 @@ def user_register(request):
                 new_user = User.objects.create(username=username)
                 new_user.set_password(password)
                 new_user.save()
-                #创建用户的同时，即创建一个读者
+                #创建用户的同时，即创建一个Reader
                 new_reader = Reader.objects.create(user=new_user, name=name, phone=int(username))
                 new_reader.photo = request.FILES['photo']
                 new_reader.save()
@@ -143,7 +143,7 @@ def user_logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
-#读者信息
+#Reader信息
 def profile(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login')
@@ -216,13 +216,13 @@ def book_search(request):
     if keyword == u'_Booklist':
         books = Book.objects.all()
     else:
-        if search_by == u'书名':
+        if search_by == u'Book name':
             keyword = request.GET.get('keyword', None)
             books = Book.objects.filter(title__contains=keyword).order_by('-title')[0:50]
         elif search_by == u'ISBN':
             keyword = request.GET.get('keyword', None)
             books = Book.objects.filter(ISBN__contains=keyword).order_by('-title')[0:50]
-        elif search_by == u'作者':
+        elif search_by == u'Author':
             keyword = request.GET.get('keyword', None)
             books = Book.objects.filter(author__contains=keyword).order_by('-title')[0:50]
 
@@ -317,10 +317,10 @@ def book_detail(request):
     state = None
 
     if action == 'borrow':
-
         if not request.user.is_authenticated:
             state = 'no_user'
         else:
+
             reader = Reader.objects.get(user_id=request.user.id)
             if reader.max_borrowing > 0:
                 reader.max_borrowing -= 1
