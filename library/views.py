@@ -261,13 +261,13 @@ def movie_search_index(request):
 
 
 def movie_search(request):
-    search_by = request.GET.get('search_by', 'Titile')
+    search_by = request.GET.get('search_by', 'Title')
     movies = []
     current_path = request.get_full_path()
 
-    keyword = request.GET.get('keyword', u'_Titile')
+    keyword = request.GET.get('keyword', u'_Title')
 
-    if keyword == u'_Titile':
+    if keyword == u'_Title':
        movies = Movie.objects.all()
     else:
         keyword = request.GET.get('keyword', None)
