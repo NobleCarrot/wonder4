@@ -3,6 +3,7 @@ from library.models import Book, Borrowing, Reader,Movie
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ('ISBN','title','author','press','description','price','category','cover','index','location','quantity')
+
 class MovieAdmin(admin.ModelAdmin):
     list_display = ('rate','title','movie_url','image','info')
 

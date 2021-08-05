@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'slack_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '1.0',
+        'NAME': '2.0',
         'USER': 'root',
         'PASSWORD': '295104364',
         'HOST': '127.0.0.1',
