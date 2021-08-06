@@ -111,8 +111,7 @@ class SearchForm(forms.Form):
             (u'Book name', u'Book name'),
             (u'Author', u'Author')
         ]
-
-        #首页搜索栏，默认书名搜索
+        # homepage search, default with book name search
         search_by = forms.ChoiceField(
             label='',
             choices=CHOICES,
@@ -136,7 +135,7 @@ class MovieSearchForm(forms.Form):
         (u'Title', u'Title')
     ]
 
-    # 首页搜索栏，默认书名搜索
+    # homepage search, default with book name search
     search_by = forms.ChoiceField(
         label='',
         choices=CHOICES,

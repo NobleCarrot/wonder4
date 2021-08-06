@@ -4,7 +4,7 @@ from django.db import IntegrityError
 
 
 class Command(BaseCommand):
-    help = "初始化管理员账户"
+    help = "initial admin account"
 
     def add_arguments(self, parser):
         parser.add_argument('--username', type=str)
@@ -23,4 +23,4 @@ class Command(BaseCommand):
             user.set_password(password)
             user.save()
 
-        self.stdout.write(self.style.SUCCESS("成功初始化管理员账户"))
+        self.stdout.write(self.style.SUCCESS("admin account created"))

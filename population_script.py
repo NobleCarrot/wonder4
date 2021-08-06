@@ -22,7 +22,7 @@ from faker import Factory
 
 fake = Factory.create('zh_CN')
 
-#初始化数据到数据库
+# this file function is automatic insert data into mysql database which named 6.0
 def init_reader_data(amount=50):
     for i in range(amount):
         u = User.objects.get_or_create(username=fake.phone_number())[0]
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     init_book_data()
     init_movie_data()
     parser = argparse.ArgumentParser()
-    parser.add_argument("data", help=u"你要生成的数据")
+    parser.add_argument("data", help=u"choose the data you want to create")
     args = parser.parse_args()
 
     if args.data == 'all':
