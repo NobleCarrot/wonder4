@@ -24,6 +24,7 @@ class Reader(models.Model):
     max_borrowing = models.IntegerField(default=5, verbose_name='remaining quantity')
     balance = models.FloatField(default=0.0, verbose_name='balance')
     photo = models.ImageField(blank=True, upload_to=custom_path, verbose_name='head portrait')
+    like = models.IntegerField(default=100, verbose_name='like')
 
     STATUS_CHOICES = (
         (0, 'normal'),
@@ -76,6 +77,16 @@ class Borrowing(models.Model):
     def __str__(self):
         return '{} borrows {}'.format(self.reader, self.ISBN)
 
+class Like(models.Model):
+    class Meta:
+        verbose_name = 'like'
+        verbose_name_plural = 'like'
+
+    reader = models.ForeignKey(Reader, on_delete=models.CASCADE, verbose_name='reader',related_name='reader')
+    ISBN = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='ISBN')
+
+    def __str__(self):
+        return '{} likes {}'.format(self.reader, self.ISBN)
 
 class Movie(models.Model):
     rate=models.CharField(max_length=4,verbose_name='score')

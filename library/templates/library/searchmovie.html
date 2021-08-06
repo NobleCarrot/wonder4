@@ -1,5 +1,5 @@
 {% extends "library/base.html" %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}search{% endblock %}
 
 {% block content %}
@@ -46,7 +46,7 @@
                     </td>
                     <td style="width: 100px">{{ movie.title }}</td>
                     <td>{{ movie.rate }}</td>
-                    <td>{{ movie.movie_url }}</td>
+                    <td><a href={{  movie.movie_url }}>{{ movie.movie_url }}</a></td>
                     <td>{{ movie.info }}</td>
                 </tr>
             {% empty %}

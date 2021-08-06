@@ -1,5 +1,5 @@
 {% extends "library/base.html" %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}Check books{% endblock %}
 
 
@@ -16,6 +16,8 @@
                     <h2> Sorry, the number of books you have borrowed has reached the maximum.</h2>
                 {% elif state == 'success' %}
                     <h2>Borrowing succeeded.</h2>
+                 {% elif state == 'like' %}
+                    <h2>Favourite succeeded.</h2>
                 {% endif %}
             </div>
         </div>
@@ -40,7 +42,7 @@
                       <img src="/media/{{ book.cover }}" alt="{{ book.title }}">
                     </div>
                     <br><br><br>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         {% if book.quantity > 0 %}
                             <button class="btn btn-primary btn-lg"
                                     onclick="location.href='detail'+'?ISBN={{ book.ISBN }}&action=borrow';">borrow
@@ -50,6 +52,11 @@
                             borrow
                             </button>
                         {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary btn-lg"
+                                onclick="location.href='detail'+'?ISBN={{ book.ISBN }}&action=like';">favourite
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-6 col-md-offset-1">

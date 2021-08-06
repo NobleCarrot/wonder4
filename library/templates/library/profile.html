@@ -1,5 +1,5 @@
 {% extends "library/base.html" %}
-{% load staticfiles %}
+{% load static %}
 {% block title %}View reader information{% endblock %}
 
 {% block content %}
@@ -14,6 +14,10 @@
                     <h2>Return the book successfully.</h2>
                 {% elif state == 'borrow_success' %}
                     <h2>Successful borrowing.</h2>
+                {% elif state == 'like_cancel' %}
+                    <h2>Successful canceling.</h2>
+                {% elif state == 'like' %}
+                    <h2>Successful like.</h2>
                 {% endif %}
             </div>
         </div>
@@ -29,7 +33,6 @@
                     <h4><span class="glyphicon glyphicon-phone"></span>
                         Tel：{{ reader.phone }}
                     </h4>
-                    <h4>Balance：{{ reader.balance }}</h4>
                     <h4>Loanable quantity：{{ reader.max_borrowing }}</h4>
                     <hr>
                     <table class="table table-bordered">
@@ -51,6 +54,24 @@
                                     <button class="btn btn-primary"
                                             onclick="location.href='../book/action?action=return_book&id={{ b.id }}';">
                                         Return
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                <table class="table table-bordered">
+                        <thead>
+                        <th>Favourite:</th>
+                        </thead>
+                        <tbody>
+                        {% for l in like %}
+                            <tr>
+                                <td><h4>{{ l.ISBN.title }}</h4></td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                            onclick="location.href='../book/action?action=like_cancel&id={{ l.id }}';">
+                                        Cancel
                                     </button>
                                 </td>
                             </tr>

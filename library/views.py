@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 import json
 
-from library.models import Book, Reader, User, Borrowing,Movie
+from library.models import Book, Reader, User, Borrowing, Movie, Like
 from library.forms import SearchForm, LoginForm, RegisterForm, ResetPasswordForm,MovieSearchForm
 
 
@@ -155,12 +155,15 @@ def profile(request):
         return HttpResponse('no this id reader')
 
     borrowing = Borrowing.objects.filter(reader=reader).exclude(date_returned__isnull=False)
+    like = Like.objects.filter(reader=reader)
 
     context = {
         'state': request.GET.get('state', None),
         'reader': reader,
         'borrowing': borrowing,
+        'like':like,
     }
+    print(borrowing)
     return render(request, 'library/profile.html', context)
 
 
@@ -171,7 +174,6 @@ def reader_operation(request):
     action = request.GET.get('action', None)
 
     if action == 'return_book':
-        #id为书的id
         id = request.GET.get('id', None)
         if not id:
             return HttpResponse('no id')
@@ -201,6 +203,17 @@ def reader_operation(request):
             b.save()
 
         return HttpResponseRedirect('/profile?state=renew_success')
+
+    elif action == 'like_cancel':
+        # id为书的id
+        id = request.GET.get('id', None)
+        if not id:
+            return HttpResponse('no id')
+        l = Like.objects.get(pk=id)
+        l.save()
+        r = Reader.objects.get(user=request.user)
+
+        return HttpResponseRedirect('/profile?state=like_cancel')
 
     return HttpResponseRedirect('/profile')
 
@@ -261,13 +274,13 @@ def movie_search_index(request):
 
 
 def movie_search(request):
-    search_by = request.GET.get('search_by', 'Title')
+    search_by = request.GET.get('search_by', 'Titile')
     movies = []
     current_path = request.get_full_path()
 
-    keyword = request.GET.get('keyword', u'_Title')
+    keyword = request.GET.get('keyword', u'_Titile')
 
-    if keyword == u'_Title':
+    if keyword == u'_Titile':
        movies = Movie.objects.all()
     else:
         keyword = request.GET.get('keyword', None)
@@ -320,7 +333,6 @@ def book_detail(request):
         if not request.user.is_authenticated:
             state = 'no_user'
         else:
-
             reader = Reader.objects.get(user_id=request.user.id)
             if reader.max_borrowing > 0:
                 reader.max_borrowing -= 1
@@ -344,6 +356,14 @@ def book_detail(request):
                 return HttpResponseRedirect('/profile?state=borrow_success')
             else:
                 state = 'upper_limit'
+    elif action == 'like':
+        reader = Reader.objects.get(user_id=request.user.id)
+        bk = Book.objects.get(pk=ISBN)
+        l = Like.objects.create(reader=reader,ISBN=bk)
+        l.save()
+        state = 'like'
+        return HttpResponseRedirect('/profile?state=like')
+
 
     context = {
         'state': state,
@@ -386,3 +406,4 @@ def statistics(request):
 
 def about(request):
     return render(request, 'library/about.html', {})
+

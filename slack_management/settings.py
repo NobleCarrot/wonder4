@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'slack_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '2.0',
+        'NAME': 'wonder2',
         'USER': 'root',
-        'PASSWORD': '295104364',
+        'PASSWORD': '736906837',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 'charset': 'utf8', },
