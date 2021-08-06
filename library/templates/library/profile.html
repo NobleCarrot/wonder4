@@ -68,12 +68,14 @@
                         {% for l in like %}
                             <tr>
                                 <td><h4>{{ l.ISBN.title }}</h4></td>
+                                <!--
                                 <td>
                                     <button class="btn btn-primary"
                                             onclick="location.href='../book/action?action=like_cancel&id={{ l.id }}';">
                                         Cancel
                                     </button>
                                 </td>
+                                -->
                             </tr>
                         {% endfor %}
                         </tbody>
